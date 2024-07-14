@@ -16,9 +16,8 @@ return {
 			require("luasnip.loaders.from_vscode").lazy_load()
 			cmp.setup({
 				snippet = {
-					-- REQUIRED - you must specify a snippet engine
 					expand = function(args)
-						require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
+						require("luasnip").lsp_expand(args.body)
 					end,
 				},
 				window = {
@@ -35,7 +34,7 @@ return {
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
 					{ name = "tags" },
-					{ name = "luasnip" }, -- For luasnip users.
+					{ name = "luasnip" },
 				}, {
 					{ name = "buffer" },
 				}),

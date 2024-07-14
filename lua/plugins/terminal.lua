@@ -1,5 +1,4 @@
 return {
-    "tc50cal/vim-terminal",
-    config = function()
-    end,
+	"tc50cal/vim-terminal",
+	config = function() end,
 }

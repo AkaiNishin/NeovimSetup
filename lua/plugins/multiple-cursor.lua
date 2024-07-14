@@ -1,7 +1,4 @@
 return {
-    "terryma/vim-multiple-cursors",
-    config = function()
-                
-    end,
+	"terryma/vim-multiple-cursors",
+	config = function() end,
 }
-
