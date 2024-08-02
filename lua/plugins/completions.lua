@@ -21,8 +21,12 @@ return {
 					end,
 				},
 				window = {
-					completion = cmp.config.window.bordered(),
-					documentation = cmp.config.window.bordered(),
+					completion = cmp.config.window.bordered({
+						border = "rounded",
+					}),
+					documentation = cmp.config.window.bordered({
+						border = "rounded",
+					}),
 				},
 				mapping = cmp.mapping.preset.insert({
 					["<C-b>"] = cmp.mapping.scroll_docs(-4),
@@ -30,11 +34,15 @@ return {
 					["<C-Space>"] = cmp.mapping.complete(),
 					["<C-e>"] = cmp.mapping.abort(),
 					["<CR>"] = cmp.mapping.confirm({ select = true }),
+					["<Tab>"] = cmp.mapping.select_next_item(),
+					["<S-Tab>"] = cmp.mapping.select_prev_item(),
 				}),
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
-					{ name = "tags" },
+					{ name = "path" }, -- Added path source
+					{ name = "nvim_lua" }, -- Added Nvim Lua source
 					{ name = "luasnip" },
+					{ name = "tags" },
 				}, {
 					{ name = "buffer" },
 				}),
@@ -42,3 +50,4 @@ return {
 		end,
 	},
 }
+

@@ -5,4 +5,5 @@ vim.cmd("set softtabstop=4")
 vim.cmd("set shiftwidth=4")
 
 require("config.lazy")
+vim.opt.tags:append('tags')
 

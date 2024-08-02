@@ -14,6 +14,7 @@ return {
 					"clangd",
 					"cmake",
 				},
+            automatic_installation = true, -- Ensure servers are installed
 			})
 		end,
 	},
@@ -22,12 +23,19 @@ return {
 		config = function()
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			local lspconfig = require("lspconfig")
-			--
+
 			lspconfig.lua_ls.setup({
 				capabilities = capabilities,
 			})
 			lspconfig.clangd.setup({
 				capabilities = capabilities,
+                cmd = {
+                    "clangd",
+                    -- Adjust as needed
+                    "--compile-commands-dir=build",
+                    -- Disable automatic header insertion if it interferes
+                    "--header-insertion=never",
+                },
 			})
 			lspconfig.cmake.setup({
 				capabilities = capabilities,
@@ -35,7 +43,8 @@ return {
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
 			vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
 			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
-		end,
+		    vim.lsp.set_log_level("debug")
+        end,
 	},
 }
 
