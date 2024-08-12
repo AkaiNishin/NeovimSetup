@@ -1,4 +1,10 @@
 return {
+    {
+        "davidhalter/jedi-vim",
+        config = function()
+            vim.g['jedi#environment_path'] = "~/Documents/Programing/venv"
+        end,
+    },
 	{
 		"hrsh7th/cmp-nvim-lsp",
 	},
