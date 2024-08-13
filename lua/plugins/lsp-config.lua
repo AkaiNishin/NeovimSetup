@@ -28,7 +28,7 @@ return {
 		config = function()
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			local lspconfig = require("lspconfig")
-
+            local venv = os.getenv('VIRTUAL_ENV')
             -- Custom function to find the root directory
             local function find_root_dir(fname)
                 return require("lspconfig.util").find_git_ancestor(fname)
@@ -52,9 +52,20 @@ return {
 			})
             lspconfig.pyright.setup({
                 capabilities = capabilities,
+                settings = {
+                    python = {
+                        pythonPath = '~/Documents/Programming/venv/bin/python'
+                    }
+                }
             })
             lspconfig.jedi_language_server.setup({
-                capabilities = capabilities
+                capabilities = capabilities,
+                init_options = {
+                    -- Use the Python interpreter from your virtual environment
+                    python = {
+                        pythonPath = '~/Documents/Programming/venv/bin/python'
+                    }
+                }
             })
             lspconfig.asm_lsp.setup({
                 capabilities = capabilities

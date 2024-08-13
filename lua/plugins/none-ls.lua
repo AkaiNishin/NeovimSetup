@@ -14,7 +14,7 @@ return {
 		})
 		vim.keymap.set("n", "<leader>gf", function()
 			local filetype = vim.bo.filetype
-			if filetype == "cpp" or filetype == "c" then
+			if filetype == "cpp" or filetype == "c" or filetype == "py" then
 				vim.lsp.buf.format({ timeout_ms = 2000 })
 			else
 				print("No formatting available for this file type")
