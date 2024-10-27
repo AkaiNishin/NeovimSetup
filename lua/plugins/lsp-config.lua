@@ -14,6 +14,7 @@ return {
 					"clangd",
 					"cmake",
                     "pylsp",
+                    "pyright",
                     -- "asm_lsp",
                     -- "svls",
                     -- "texlab",
@@ -28,21 +29,68 @@ return {
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
             local lspconfig = require("lspconfig")
 
+            lspconfig.pyright.setup({
+                capabilities = capabilities,
+                settings = {
+                    pyright = {
+                        python = {
+                            analysis = {
+                            useLibraryCodeForTypes = true,
+                            diagnosticSeverityOverrides = {
+                                reportGeneralTypeIssues = "none",
+                                reportOptionalMemberAccess = "none",
+                                reportOptionalSubscript = "none",
+                                reportPrivateImportUsage = "none",
+                                },
+                            autoImportCompletions = false,
+                            },
+                            linting = {pylintEnabled = false}
+                        }
+                      },
+                }
+            })
+
             lspconfig.pylsp.setup({
                 capabilities = capabilities,
                     settings = {
                         pylsp = {
-                    plugins = {
+                            builtin = {
+                                installExtraArgs = {
+                                    'flake8',
+                                    'pycodestyle',
+                                    'pydocstyle',
+                                    'pyflakes',
+                                    'pylint',
+                                    'yapf'
+                                },
+                            },
+                            plugins = {
+                                jedi_completion = { enabled = false },
+                                rope_completion = { enabled = false },
+                                flake8 = { enabled = false },
+                                pyflakes = { enabled = false },
                                 pycodestyle = {
-                                    enabled = false,
-                                    ignore = {'W391'},
-                                },
-                                jedi_completion = {
-                                    enabled = true,
-                                },
-                            }
-                        }
-                    }
+                                --     ignore = {
+                                --         "all",
+                                --         'E226',
+                                --         'E266',
+                                --         'E302',
+                                --         'E303',
+                                --         'E304',
+                                --         'E305',
+                                --         'E402',
+                                --         'C0103',
+                                --         'W0104',
+                                --         'W0621',
+                                --         'W391',
+                                --         'W503',
+                                --         'W504'
+                                -- },
+                                maxLineLength = 99,
+                            },
+                        },
+                    },
+                }
             })
           	lspconfig.lua_ls.setup({
 				capabilities = capabilities,
