@@ -11,9 +11,22 @@ return {
 	    vim.keymap.set("n", "<C-t>", ":Neotree toggle<CR>")
         require("neo-tree").setup({
             filesystem = {
+                window = {
+                    mappings = {
+                        ["<leader>p"] = "image_wezterm", -- " or another map
+                    },
+                },
                 filtered_items = {
                     hide_dotfiles = false,
                     hide_gitignore = false,
+                },
+                commands = {
+                    image_wezterm = function(state)
+                    local node = state.tree:get_node()
+                    if node.type == "file" then
+                        require("image_preview").PreviewImage(node.path)
+                    end
+                    end,
                 },
             },
         })

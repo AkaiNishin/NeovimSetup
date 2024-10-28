@@ -1,8 +1,8 @@
 return {
     'adelarsq/image_preview.nvim',
-    event = 'VeryLazy',
+    event = "VeryLazy",
     config = function()
-        require("image_preview").setup()
+        require("image_preview").setup({})
     end
 }
 
